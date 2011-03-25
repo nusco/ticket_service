@@ -4,10 +4,23 @@ GEM
     RubyInline (3.9.0)
       ZenTest (~> 4.3)
     ZenTest (4.5.0)
+    activesupport (3.0.5)
     barby (0.4.2)
+    configuration (1.2.0)
+    heroku (1.19.1)
+      activesupport (>= 2.1.0)
+      launchy (~> 0.3.2)
+      rest-client (< 1.7.0, >= 1.4.0)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    mime-types (1.16)
     png (1.2.0)
-    rack (1.2.1)
-    sinatra (1.2.0)
+    rack (1.2.2)
+    rake (0.8.7)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
+    sinatra (1.2.1)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
     tilt (1.2.2)
@@ -18,5 +31,6 @@ PLATFORMS
 DEPENDENCIES
   RubyInline
   barby
+  heroku
   png
   sinatra
