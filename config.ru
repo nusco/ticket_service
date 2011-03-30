@@ -1,2 +1,2 @@
-require './tickets'
+require 'lib/tickets'
 run Sinatra::Application
