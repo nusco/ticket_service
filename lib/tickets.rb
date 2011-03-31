@@ -6,7 +6,8 @@ require File.join(File.dirname(__FILE__), 'barcodes.rb')
 require File.join(File.dirname(__FILE__), 'database.rb')
 
 get '/' do
-  File.read 'index.html'
+  content_type 'text/html'
+  File.read 'index.txt'
 end
 
 put '/ticket/:abus_code/:atram_code' do
