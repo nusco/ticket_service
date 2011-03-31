@@ -11,8 +11,8 @@ ENV['RACK_ENV'] = 'test'
 
 describe "Ticket Service documentation" do
   before (:each) do
-    Timecop.freeze
     Ticket.destroy
+    Timecop.freeze
   end
   
   after :each do
@@ -21,11 +21,9 @@ describe "Ticket Service documentation" do
 
   describe "A Ticket..." do
     it "...expires after one hour" do
-      Timecop.freeze do
-        t = Ticket.new(:created_at => Time.now)
-        Timecop.freeze(Ticket::DURATION) { t.should_not be_expired }
-        Timecop.freeze(Ticket::DURATION + 1) { t.should be_expired }
-      end
+      t = Ticket.new(:created_at => Time.now)
+      Timecop.freeze(Ticket::DURATION) { t.should_not be_expired }
+      Timecop.freeze(Ticket::DURATION + 1) { t.should be_expired }
     end
   end
 
@@ -36,7 +34,7 @@ describe "Ticket Service documentation" do
       @app ||= Sinatra::Application
     end
   
-    it "...has documentation at the root" do
+    it "...has this documentation at the root" do
       get '/'
       last_response.should be_ok
     end

@@ -2,7 +2,7 @@ require 'dm-core'
 DataMapper.setup(:default, 'sqlite::memory:')
 
 class Ticket
-  DURATION =3600
+  DURATION = 3600
   include DataMapper::Resource
 
   property :id         , Serial
