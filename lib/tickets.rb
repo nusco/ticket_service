@@ -39,10 +39,12 @@ post '/check_ins/:abus_code/:atram_code' do
   )
   halt 404 unless ticket
   halt 403 if ticket.expired?
-  
-  "OK"
 end
 
 post '/check_outs/:abus_code/:atram_code' do
-  # TODO
+  ticket = Ticket.first(
+    :abus_code => params[:abus_code],
+    :atram_code => params[:atram_code]
+  )
+  halt 404 unless ticket
 end
