@@ -9,18 +9,6 @@ get '/' do
   File.read 'index.html'
 end
 
-get '/ticket/:abus_code/:atram_code' do
-  ticket = Ticket.first(
-    :abus_code => params[:abus_code],
-    :atram_code => params[:atram_code]
-  )
-  halt 404 unless ticket
-  halt 403 if ticket.expired?
-  
-  content_type :png
-  body barcode(params[:abus_code], params[:atram_code])
-end
-
 put '/ticket/:abus_code/:atram_code' do
   Ticket.create(
     :abus_code => params[:abus_code],
@@ -29,22 +17,25 @@ put '/ticket/:abus_code/:atram_code' do
   )
   
   content_type :png
-  body ticket(params[:abus_code], params[:atram_code])
+  body barcode(params[:abus_code], params[:atram_code])
+end
+
+get '/ticket/:abus_code/:atram_code' do
+  ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
+  halt 404 unless ticket
+  halt 403 if ticket.expired?
+  
+  content_type :png
+  body barcode(params[:abus_code], params[:atram_code])
 end
 
 post '/check_ins/:abus_code/:atram_code' do
-  ticket = Ticket.first(
-    :abus_code => params[:abus_code],
-    :atram_code => params[:atram_code]
-  )
+  ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
   halt 404 unless ticket
   halt 403 if ticket.expired?
 end
 
 post '/check_outs/:abus_code/:atram_code' do
-  ticket = Ticket.first(
-    :abus_code => params[:abus_code],
-    :atram_code => params[:atram_code]
-  )
+  ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
   halt 404 unless ticket
 end

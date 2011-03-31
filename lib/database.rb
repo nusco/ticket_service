@@ -14,6 +14,10 @@ class Ticket
   def expired?
     Time.now - created_at > DURATION
   end
+  
+  def self.retrieve(abus_code, atram_code)
+    Ticket.first(:abus_code => abus_code, :atram_code => atram_code)
+  end
 end
 
 DataMapper.finalize
