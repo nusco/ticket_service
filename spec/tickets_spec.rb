@@ -9,12 +9,6 @@ require 'timecop'
 require File.join(File.dirname(__FILE__), '../lib/tickets.rb')
 ENV['RACK_ENV'] = 'test'
 
-# Remove?
-RSpec.configure do |conf|
-  conf.include Rack::Test::Methods
-end
-
-
 describe "Ticket Service" do
   before (:each) do
     Timecop.freeze
