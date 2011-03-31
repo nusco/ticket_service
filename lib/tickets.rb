@@ -5,7 +5,7 @@ require 'sinatra'
 require File.join(File.dirname(__FILE__), 'model.rb')
 
 get '/' do
-  content_type 'text/plain'
+  content_type :text
   File.read 'api.txt'
 end
 

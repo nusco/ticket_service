@@ -1,22 +1,28 @@
 
 Ticket Service documentation
-  A Ticket...
-    ...expires after one hour
-  The online REST service...
-    ...has this documentation at the root
-    By accessing a Ticket (/ticket/[abus_code]/[atram_code]), you:
-      PUT a new ticket
-      GET a ticket as a .png barcode
-      GET a 403 if the ticket is expired
-      GET a 404 if the ticket is invalid
-    By accessing CheckIns (/check_ins/[abus_code]/[atram_code]), you:
-      POST a new check in
-      POST a 403 if the ticket is expired
-      POST a 404 if the ticket is invalid
-    By accessing CheckOuts (/check_outs/[abus_code]/[atram_code]), you:
-      POST a new check out
-      POST a new check out with an expired ticket
-      POST a 404 if the ticket is invalid
+  A Ticket:
+    expires after one hour
+  Ticket Service API:
+    The root resource (/):
+      GET
+        returns this documentation
+    The Ticket resource (/ticket/[abus_code]/[atram_code]):
+      PUT
+        creates a new ticket
+      GET
+        returns the ticket as a .png barcode
+        returns a 403 if the ticket is expired
+        returns a 404 if the ticket is invalid
+    The CheckIns resource (/check_ins/[abus_code]/[atram_code]):
+      POST
+        creates a new check in
+        returns a 403 if the ticket is expired
+        returns a 404 if the ticket is invalid
+    The CheckOuts resource (/check_outs/[abus_code]/[atram_code]):
+      POST
+        creates a new check out
+        still creates a check out if the ticket is expired
+        returns a 404 if the ticket is invalid
 
-Finished in 1.52 seconds
+Finished in 1.61 seconds
 12 examples, 0 failures
