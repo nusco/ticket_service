@@ -18,5 +18,5 @@ Ticket Service documentation
       POST a new check out with an expired ticket
       POST a 404 if the ticket is invalid
 
-Finished in 2.81 seconds
+Finished in 2.82 seconds
 12 examples, 0 failures
