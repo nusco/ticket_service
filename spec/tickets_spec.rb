@@ -53,7 +53,7 @@ describe "Ticket Service" do
         put '/ticket/abus_001/atram_002'
 
         get '/ticket/abus_001/atram_002'
-        last_response.should be_ok
+        last_response.status.should == 200
       end
 
       it "should GET the ticket as a .png barcode" do
@@ -84,7 +84,7 @@ describe "Ticket Service" do
         put '/ticket/abus_001/atram_002'
 
         post '/check_ins/abus_001/atram_002'
-        last_response.should be_ok
+        last_response.status.should == 200
       end
 
       it "should POST a 403 if the ticket is expired" do
@@ -98,6 +98,29 @@ describe "Ticket Service" do
 
       it "should POST a 404 if the ticket is invalid" do
         post '/check_ins/abus_001/atram_002'
+        last_response.status.should == 404
+      end
+    end
+
+    describe "the CheckOuts resource (/check_outs/[abus_code]/[atram_code])" do
+      it "should POST a new check out" do
+        put '/ticket/abus_001/atram_002'
+
+        post '/check_outs/abus_001/atram_002'
+        last_response.should be_ok
+      end
+
+      it "should POST a new check out with an expired the ticket" do
+        put '/ticket/abus_001/atram_002'
+  
+        Timecop.travel(Ticket::DURATION * 2) do
+          post '/check_outs/abus_001/atram_002'
+          last_response.status.should == 200
+        end
+      end
+
+      it "should POST a 404 if the ticket is invalid" do
+        post '/check_outs/abus_001/atram_002'
         last_response.status.should == 404
       end
     end
