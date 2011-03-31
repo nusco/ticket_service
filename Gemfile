@@ -11,13 +11,12 @@ end
 group :database do
   gem "dm-core"
   gem "dm-migrations"
-#  gem "dm-postgres-adapter"
+  gem "dm-sqlite-adapter"
 end
 
 group :development do
   gem "heroku"
-  gem "dm-sqlite-adapter"
-  gem 'rspec', '2.5.0'
+  gem 'rspec'
   gem 'rspec-core'
   gem "rack-test"
   gem "timecop"

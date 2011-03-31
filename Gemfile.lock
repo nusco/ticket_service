@@ -64,7 +64,7 @@ DEPENDENCIES
   heroku
   png
   rack-test
-  rspec (= 2.5.0)
+  rspec
   rspec-core
   sinatra
   timecop

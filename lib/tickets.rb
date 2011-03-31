@@ -27,22 +27,22 @@ put '/ticket/:abus_code/:atram_code' do
     :atram_code => params[:atram_code],
     :created_at => Time.now
   )
+  
   content_type :png
   body ticket(params[:abus_code], params[:atram_code])
 end
 
-post '/check_ins/:abus_code/:atram_code/' do
-   # TODO: return 200 or 40x
+post '/check_ins/:abus_code/:atram_code' do
+  ticket = Ticket.first(
+    :abus_code => params[:abus_code],
+    :atram_code => params[:atram_code]
+  )
+  halt 404 unless ticket
+  halt 403 if ticket.expired?
+  
+  "OK"
 end
 
-get '/check_ins/:abus_code/:atram_code/' do
-   # TODO: return 200 or 40x
-end
-
-post '/check_outs/:abus_code/:atram_code/' do
+post '/check_outs/:abus_code/:atram_code' do
   # TODO
-end
-
-get '/check_ins/:abus_code/:atram_code/' do
-   # TODO: return 200 or 40x
 end
