@@ -31,25 +31,44 @@ describe "Tickets Service" do
     @app ||= Sinatra::Application
   end
 
+  before :all do
+    Timecop.freeze
+  end
+  
+  after :all do
+    Timecop.return
+  end
+  
   it "should have a home page" do
     get '/'
     last_response.should be_ok
   end
 
-  it "should show a ticket" do
-    get '/ticket/abus_001/atram_002'
-#    last_response.should be_ok
-#    last_response.content_type.should == "image/png"
-  end
-
-  it "should refuse to show expired tickets" do
-    Timecop.freeze do
-      put '/ticket/abus_001/atram_002'
-      Timecop.travel(10000) do
+  describe "the Ticket resource (/ticket/[abus_code]/[atram_code])" do
+    it "should GET the ticket as a .png barcode" do
+      Timecop.freeze do
+        put '/ticket/abus_001/atram_002'
+      
         get '/ticket/abus_001/atram_002'
-        last_response.should_not be_ok
-        last_response.status.should == 404
+        last_response.should be_ok
+        last_response.content_type.should == "image/png"
       end
+    end
+
+    it "should GET a 400 if the ticket is expired" do
+      Timecop.freeze do
+        put '/ticket/abus_001/atram_002'
+      
+        Timecop.travel(10000) do
+          get '/ticket/abus_001/atram_002'
+          last_response.status.should == 403
+        end
+      end
+    end
+
+    it "should GET a 404 if the ticket is invalid" do
+      get '/ticket/abus_000/atram_999'
+      last_response.status.should == 404
     end
   end
 end

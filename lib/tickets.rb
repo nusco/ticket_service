@@ -10,10 +10,12 @@ get '/' do
 end
 
 get '/ticket/:abus_code/:atram_code' do
-#  ticket = Ticket.find :abus_code => abus_code, :atram_code => atram_code
-  ticket = nil
-  
+  ticket = Ticket.first(
+    :abus_code => params[:abus_code],
+    :atram_code => params[:atram_code]
+  )
   halt 404 unless ticket
+  halt 403 if ticket.expired?
   
   content_type :png
   body barcode(params[:abus_code], params[:atram_code])
@@ -21,8 +23,8 @@ end
 
 put '/ticket/:abus_code/:atram_code' do
   Ticket.create(
-    :abus_code => abus_code,
-    :atram_code => atram_code,
+    :abus_code => params[:abus_code],
+    :atram_code => params[:atram_code],
     :created_at => Time.now
   )
   content_type :png

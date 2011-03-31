@@ -4,9 +4,9 @@ class Ticket
   include DataMapper::Resource
 
   property :id,         Serial
-  property :abus_code,  String
-  property :atram_code, String
   property :created_at, Time
+  property :abus_code,  String, :unique => true
+  property :atram_code, String, :unique => true
   
   def expired?
     Time.now - created_at > DURATION
