@@ -6,13 +6,13 @@ require File.join(File.dirname(__FILE__), 'barcodes.rb')
 require File.join(File.dirname(__FILE__), 'database.rb')
 
 get '/' do
-  content_type 'text/html'
+  content_type 'text/plain'
   File.read 'index.txt'
 end
 
 put '/ticket/:abus_code/:atram_code' do
   Ticket.create(
-    :abus_code => params[:abus_code],
+    :abus_code  => params[:abus_code],
     :atram_code => params[:atram_code],
     :created_at => Time.now
   )
