@@ -2,12 +2,11 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 
-require File.join(File.dirname(__FILE__), 'barcodes.rb')
-require File.join(File.dirname(__FILE__), 'database.rb')
+require File.join(File.dirname(__FILE__), 'model.rb')
 
 get '/' do
   content_type 'text/plain'
-  File.read 'index.txt'
+  File.read 'api.txt'
 end
 
 put '/ticket/:abus_code/:atram_code' do
@@ -18,25 +17,25 @@ put '/ticket/:abus_code/:atram_code' do
   )
   
   content_type :png
-  body barcode(params[:abus_code], params[:atram_code])
+  ticket.to_barcode
 end
 
 get '/ticket/:abus_code/:atram_code' do
   ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
-  halt 404 unless ticket
-  halt 403 if ticket.expired?
+  halt(404, 'Invalid ticket') unless ticket
+  halt(403, 'Your ticket has expired') if ticket.expired?
   
   content_type :png
-  body barcode(params[:abus_code], params[:atram_code])
+  ticket.to_barcode
 end
 
 post '/check_ins/:abus_code/:atram_code' do
   ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
-  halt 404 unless ticket
-  halt 403 if ticket.expired?
+  halt(404, 'Invalid ticket') unless ticket
+  halt(403, 'Your ticket has expired') if ticket.expired?
 end
 
 post '/check_outs/:abus_code/:atram_code' do
   ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
-  halt 404 unless ticket
+  halt(404, 'Invalid ticket') unless ticket
 end
