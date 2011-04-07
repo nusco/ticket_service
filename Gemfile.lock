@@ -4,7 +4,7 @@ GEM
     RubyInline (3.9.0)
       ZenTest (~> 4.3)
     ZenTest (4.5.0)
-    activesupport (3.0.5)
+    activesupport (3.0.6)
     addressable (2.2.4)
     barby (0.4.2)
     configuration (1.2.0)
