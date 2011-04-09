@@ -9,7 +9,7 @@ get '/' do
   File.read 'api.txt'
 end
 
-put '/ticket/:abus_code/:atram_code' do
+put '/tickets/:abus_code/:atram_code' do
   Ticket.create(
     :abus_code  => params[:abus_code],
     :atram_code => params[:atram_code],
@@ -20,7 +20,7 @@ put '/ticket/:abus_code/:atram_code' do
   ticket.to_barcode
 end
 
-get '/ticket/:abus_code/:atram_code' do
+get '/tickets/:abus_code/:atram_code' do
   ticket = Ticket.retrieve params[:abus_code], params[:atram_code]
   halt(404, 'Invalid ticket') unless ticket
   halt(403, 'Your ticket has expired') if ticket.expired?
