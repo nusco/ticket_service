@@ -6,7 +6,7 @@ Ticket Service documentation
     The root resource (/):
       GET
         returns this documentation
-    The Ticket resource (/ticket/[abus_code]/[atram_code]):
+    The Ticket resource (/tickets/[abus_code]/[atram_code]):
       PUT
         creates a new ticket
       GET
