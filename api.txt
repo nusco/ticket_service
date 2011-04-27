@@ -1,28 +1,29 @@
 
 Ticket Service documentation
   A Ticket:
-    expires after one hour
+[32m    expires after one hour[0m
   Ticket Service API:
     The root resource (/):
       GET
-        returns this documentation
+[32m        returns this documentation[0m
     The Ticket resource (/tickets/[abus_code]/[atram_code]):
       PUT
-        creates a new ticket
+[32m        creates a new ticket[0m
+[32m        returns 201 if it succeeds[0m
       GET
-        returns the ticket as a .png barcode
-        returns a 403 if the ticket is expired
-        returns a 404 if the ticket is invalid
+[32m        returns the ticket as a .png barcode[0m
+[32m        returns a 403 if the ticket is expired[0m
+[32m        returns a 404 if the ticket is invalid[0m
     The CheckIns resource (/check_ins/[abus_code]/[atram_code]):
       POST
-        creates a new check in
-        returns a 403 if the ticket is expired
-        returns a 404 if the ticket is invalid
+[32m        creates a new check in[0m
+[32m        returns a 403 if the ticket is expired[0m
+[32m        returns a 404 if the ticket is invalid[0m
     The CheckOuts resource (/check_outs/[abus_code]/[atram_code]):
       POST
-        creates a new check out
-        still creates a check out if the ticket is expired
-        returns a 404 if the ticket is invalid
+[32m        creates a new check out[0m
+[32m        still creates a check out if the ticket is expired[0m
+[32m        returns a 404 if the ticket is invalid[0m
 
-Finished in 1.59 seconds
-12 examples, 0 failures
+Finished in 3.13 seconds
+[32m13 examples, 0 failures[0m

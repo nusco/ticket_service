@@ -47,9 +47,14 @@ describe "Ticket Service documentation" do
       describe "PUT" do
         it "creates a new ticket" do
           put '/tickets/abus_001/atram_002'
-
+          
           get '/tickets/abus_001/atram_002'
           last_response.status.should == 200
+        end
+
+        it "returns 201 if it succeeds" do
+          put '/tickets/abus_001/atram_002'
+          last_response.status.should == 201
         end
       end
 

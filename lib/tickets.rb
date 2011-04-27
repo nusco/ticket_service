@@ -10,12 +10,13 @@ get '/' do
 end
 
 put '/tickets/:abus_code/:atram_code' do
-  Ticket.create(
+  ticket = Ticket.create(
     :abus_code  => params[:abus_code],
     :atram_code => params[:atram_code],
     :created_at => Time.now
   )
   
+  status 201
   content_type :png
   ticket.to_barcode
 end
