@@ -9,6 +9,10 @@ get '/' do
   File.read 'api.txt'
 end
 
+post '/' do
+  Ticket.destroy
+end
+
 put '/tickets/:abus_code/:atram_code' do
   ticket = Ticket.create(
     :abus_code  => params[:abus_code],

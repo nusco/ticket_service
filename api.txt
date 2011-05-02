@@ -6,6 +6,8 @@ Ticket Service documentation
     The root resource (/):
       GET
 [32m        returns this documentation[0m
+      POST
+[32m        destroys the ticket database[0m
     The Ticket resource (/tickets/[abus_code]/[atram_code]):
       PUT
 [32m        creates a new ticket[0m
@@ -25,5 +27,5 @@ Ticket Service documentation
 [32m        still creates a check out if the ticket is expired[0m
 [32m        returns a 404 if the ticket is invalid[0m
 
-Finished in 3.13 seconds
-[32m13 examples, 0 failures[0m
+Finished in 3.42 seconds
+[32m14 examples, 0 failures[0m

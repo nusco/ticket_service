@@ -38,7 +38,17 @@ describe "Ticket Service documentation" do
       describe "GET" do
         it "returns this documentation" do
           get '/'
-          last_response.should be_ok
+          last_response.status.should == 200
+        end
+      end
+
+      describe "POST" do
+        it "destroys the ticket database" do
+          put '/tickets/abus_001/atram_002'
+          
+          post '/'
+          get '/tickets/abus_001/atram_002'
+          last_response.status.should == 404
         end
       end
     end
