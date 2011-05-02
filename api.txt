@@ -27,5 +27,5 @@ Ticket Service documentation
         still creates a check out if the ticket is expired
         returns a 404 if the ticket is invalid
 
-Finished in 3.38 seconds
+Finished in 3.37 seconds
 14 examples, 0 failures
